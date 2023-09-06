@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Inspired by ade-atom, modified by Ignacio Vizzo
+# Copyright 2018 Apex.AI, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+set -xe
+
+cd "$(dirname "$(realpath "$0")")"
+
+# Example: v0.9.1
+NEOVIM_VERSION="$1"
+# Manually pick latest LTS version
+NODE_VERSION="v18.17.1"
+
+shift
+
+# Download and install Neovim
+curl -LO "https://github.com/neovim/neovim/releases/download/${NEOVIM_VERSION}/nvim-linux64.tar.gz"
+tar xzf nvim-linux64.tar.gz
+mv nvim-linux64 _opt_neovim
+rm nvim-linux64.tar.gz
+
+# Install NodeJS. Otherwise nvim is not really usefull
+curl -LO https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz
+tar -xf node-${NODE_VERSION}-linux-x64.tar.xz
+cp -r node-${NODE_VERSION}-linux-x64/ _opt_neovim/
+rm -rf node-${NODE_VERSION}-linux-x64/
+rm node-${NODE_VERSION}-linux-x64.tar.xz
+
+# Environment Setup
+cp env.sh _opt_neovim/.env.sh
+cp adeinit _opt_neovim/.adeinit
+
+# Use _opt_neovim for readability, rename to _opt b/c it's expected by Dockerfile
+mv _opt_neovim _opt
