@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
+set -e
 
 if [[ ! -d "${NVIM_HOME}" ]]; then
     echo "Doing initial install of Neovim plugins:"
-    git clone https://github.com/nachovizzo/dotfiles.git
+    git clone https://github.com/nachovizzo/dotfiles.git /tmp/dotfiles
 
-    source dotfiles/.config/yadm/functions.sh
+    mkdir -p ${HOME}/.config/
+    cp -R /tmp/dotfiles/.config/nvim/ ${HOME}/.config/
+    source /tmp/dotfiles/.config/yadm/functions.sh
     install_neovim_extensions
 
     echo "Initial install of Neovim plugins done."
+else
+    echo "Neovim plugins already initialized! Skiping..."
 fi
