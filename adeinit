@@ -5,7 +5,7 @@ DOTFILES_DIR="/tmp/dotfiles"
 
 if [[ ! -d "${NVIM_HOME}" ]]; then
     echo "Doing initial install of Neovim plugins... (this might take a while)"
-    git clone https://github.com/nachovizzo/dotfiles.git ${DOTFILES_DIR} >/dev/null || true
+    git clone https://github.com/nachovizzo/dotfiles.git ${DOTFILES_DIR} 2>/dev/null || true
 
     mkdir -p ${HOME}/.config/
     cp -R ${DOTFILES_DIR}/.config/nvim/ ${HOME}/.config/
@@ -13,7 +13,7 @@ if [[ ! -d "${NVIM_HOME}" ]]; then
     install_neovim_extensions
 
     echo "Initial install of Neovim plugins done."
-    rm -rf ${DOTFILES_DIR}/ >/dev/null || true
+    rm -rf ${DOTFILES_DIR}/ 2>/dev/null || true
 else
     echo "Neovim plugins already initialized! Skiping..."
 fi
