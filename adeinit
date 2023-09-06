@@ -2,8 +2,8 @@
 set -e
 
 if [[ ! -d "${NVIM_HOME}" ]]; then
-    echo "Doing initial install of Neovim plugins:"
-    git clone https://github.com/nachovizzo/dotfiles.git /tmp/dotfiles
+    echo "Doing initial install of Neovim plugins... (this might take a while)"
+    git clone https://github.com/nachovizzo/dotfiles.git /tmp/dotfiles >/dev/null
 
     mkdir -p ${HOME}/.config/
     cp -R /tmp/dotfiles/.config/nvim/ ${HOME}/.config/
