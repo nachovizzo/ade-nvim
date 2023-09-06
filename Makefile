@@ -12,6 +12,5 @@ docker:_opt
 			--label ade_image_commit_tag="$(COMMIT_TAG)" \
 			-t ade-nvim . \
 
-
 run:
 	docker run --platform linux/amd64 --rm -it ade-nvim:latest
