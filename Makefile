@@ -2,6 +2,7 @@ COMMIT_SHA:=$(shell git rev-parse HEAD)
 COMMIT_TAG:=$(shell git describe --tags --abbrev=0)
 
 build:
+	rm -rf _opt/ 2>/dev/null || true
 	./build-opt v0.9.1
 	docker build \
 			--platform linux/amd64  \
