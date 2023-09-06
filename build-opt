@@ -7,10 +7,9 @@ set -xe
 
 cd "$(dirname "$(realpath "$0")")"
 
-# Example: v0.9.1
 NEOVIM_VERSION="$1"
-# Manually pick latest LTS version
 NODE_VERSION="v18.17.1"
+CLANGD_VERSION="16.0.2"
 
 shift
 
@@ -26,6 +25,13 @@ tar -xf node-${NODE_VERSION}-linux-x64.tar.xz
 cp -R node-${NODE_VERSION}-linux-x64/* _opt_neovim/
 rm -rf node-${NODE_VERSION}-linux-x64/
 rm node-${NODE_VERSION}-linux-x64.tar.xz
+
+# Install clangd, otherwise nvim is not that great
+curl -LO https://github.com/clangd/clangd/releases/download/${CLANGD_VERSION}/clangd-linux-${CLANGD_VERSION}.zip
+unzip clangd-linux-${CLANGD_VERSION}.zip
+cp -R clangd-linux-${CLANGD_VERSION}/* _opt_neovim/
+rm -rf clangd-linux-${CLANGD_VERSION}/
+rm clangd-linux-${CLANGD_VERSION}.zip/
 
 # Environment Setup
 cp env.sh _opt_neovim/.env.sh
