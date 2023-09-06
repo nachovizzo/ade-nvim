@@ -3,7 +3,7 @@ COMMIT_TAG:=$(shell git describe --tags --abbrev=0)
 
 _opt:
 	rm -rf _opt/ 2>/dev/null || true
-	./build-opt $(COMMIt_TAg)
+	./build-opt $(COMMIT_TAG)
 
 docker:_opt
 	docker build \
