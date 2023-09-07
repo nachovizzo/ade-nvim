@@ -30,4 +30,8 @@ export ADE_IMAGES="
 
 ### Installing plugins automatically
 
-WIP...
+First time you bootstratp ade if no `.config/nvim` is present then all the plugins will be automatically installed.
+
+### Dependencies
+
+Who knows!? I guess the base ade image must have clang-format pre isntalled and other bunch of stuff. 
