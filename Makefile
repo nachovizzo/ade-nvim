@@ -7,3 +7,6 @@ _opt:
 
 docker:_opt
 	docker build --platform linux/amd64 --label ade_image_commit_sha="$(COMMIT_SHA)" --label ade_image_commit_tag="$(COMMIT_TAG)" -t ignaciovizzo/ade-nvim .
+
+clean:
+	@git clean -xff .
