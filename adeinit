@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 set -e
 
-DOTFILES_DIR="/tmp/dotfiles"
+DOTFILES_HOME="$HOME/.dotfiles"
+NVIM_HOME="$HOME/.config/nvim"
+TMUX_HOME="$HOME/.tmux"
+
+if [[ ! -d "${DOTFILES_HOME}" ]]; then
+    git clone https://github.com/nachovizzo/dotfiles.git ${DOTFILES_HOME}
+fi
 
 if [[ ! -d "${NVIM_HOME}" ]]; then
-    echo "Doing initial install of Neovim plugins... (this might take a while)"
-    git clone https://github.com/nachovizzo/dotfiles.git ${DOTFILES_DIR}
+    echo "Doing initial install of Neovim plugins (this might take a while)..."
 
+    # Copy the Neovim configuration files and install plugins
     mkdir -p ${HOME}/.config/
-    cp -R ${DOTFILES_DIR}/.config/nvim/ ${HOME}/.config/
-    source ${DOTFILES_DIR}/.config/yadm/functions.sh
-    install_neovim_extensions
+    cp -R ${DOTFILES_HOME}/.config/nvim/ ${HOME}/.config/
+    source ${DOTFILES_HOME}/.config/yadm/functions.sh && install_neovim_extensions
+fi
 
-    echo "Initial install of Neovim plugins done."
-    rm -rf ${DOTFILES_DIR}/
-else
-    echo "Neovim plugins already initialized! Skiping..."
+if [[ ! -d "${TMUX_HOME}" ]]; then
+    echo "Installing tmux configuration"
+    cp -R ${DOTFILES_HOME}/.tmux* ${HOME}/
 fi
