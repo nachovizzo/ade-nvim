@@ -5,6 +5,10 @@ DOTFILES_HOME="$HOME/.dotfiles"
 NVIM_HOME="$HOME/.config/nvim"
 TMUX_HOME="$HOME/.tmux"
 
+if [[ -n "$DEBUG" ]]; then
+    set -x
+fi
+
 if [[ ! -d "${DOTFILES_HOME}" ]]; then
     git clone https://github.com/nachovizzo/dotfiles.git ${DOTFILES_HOME}
 fi
